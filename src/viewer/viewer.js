@@ -38,6 +38,9 @@ const PHONE = window.matchMedia('(max-width: 600px)');
 // whole house fits either way.
 const minimapSize = () => (PHONE.matches ? 140 : 260);
 const minimapZoom = () => (10 * minimapSize()) / 260;
+// A swipe across the screen turns the view by what the screen shows, and a phone held
+// upright shows a narrow slice, so looking around took a dozen swipes. Turn faster there.
+const moveSpeed = () => (PHONE.matches ? 2.5 : 1);
 // The plan image has wide margins (dimension lines, carport), so overfill the screen a bit.
 const OPEN_PLAN_FILL = 1.3;
 // One floor of a plan with several is cropped tight; leave room for the tabs and toolbar.
@@ -108,12 +111,16 @@ export function createViewer({ container, tour, baseUrl, startRoom, onRoomChange
     lang: LANG,
     loadingTxt: 'Načítání…',
     defaultZoomLvl: 30,
+    moveSpeed: moveSpeed(),
     defaultYaw: tour.rooms.find((r) => r.id === startRoom)?.startYaw ?? 0,
     touchmoveTwoFingers: false,
     mousewheelCtrlKey: false,
     navbar,
     plugins,
   });
+
+  // Phone rotated, or the window resized across the breakpoint.
+  PHONE.addEventListener('change', () => viewer.setOption('moveSpeed', moveSpeed()));
 
   const vt = viewer.getPlugin(VirtualTourPlugin);
   const map = hasPlan ? viewer.getPlugin(MapPlugin) : null;

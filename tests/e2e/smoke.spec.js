@@ -72,6 +72,20 @@ test.describe('on a phone', () => {
   const { defaultBrowserType, ...iPhone } = devices['iPhone 13'];
   test.use(iPhone);
 
+  test('a swipe turns the view further than the finger moves', async ({ page }) => {
+    await page.goto('/?house=trojanovice&room=chodba2');
+    const link = page.locator('.tour-link[data-to="obyvak"]');
+    await expect(link).toBeVisible({ timeout: 30_000 });
+    await page.waitForTimeout(1500);
+    const before = (await link.boundingBox()).x;
+    // Drag 40 px to the left; the doorway ahead must slide further than that.
+    await page.mouse.move(200, 300);
+    await page.mouse.down();
+    await page.mouse.move(160, 300, { steps: 4 });
+    await page.mouse.up();
+    await expect.poll(async () => before - ((await link.boundingBox())?.x ?? before)).toBeGreaterThan(40);
+  });
+
   test('minimap is small and a tap opens the full plan', async ({ page }) => {
     await page.goto('/?house=trojanovice&room=chodba');
     const map = page.locator('.psv-map');
