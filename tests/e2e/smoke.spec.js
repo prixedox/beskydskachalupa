@@ -120,6 +120,23 @@ test.describe('on a phone', () => {
     await expect.poll(async () => before - ((await link.boundingBox())?.x ?? before)).toBeGreaterThan(40);
   });
 
+  test('fullscreen of an embedded tour covers the whole page', async ({ page }) => {
+    // A page of the same site with the tour in a small frame, as on the website.
+    await page.route('**/embed-test.html', (route) => route.fulfill({
+      contentType: 'text/html',
+      body: '<!doctype html><meta name="viewport" content="width=device-width, initial-scale=1"><body style="margin:0;height:3000px"><iframe id="tour" src="/?house=trojanovice&room=chodba" style="width:300px;height:400px;margin:120px 0 0 20px;border:0"></iframe></body>',
+    }));
+    await page.goto('/embed-test.html');
+    const frame = page.locator('#tour');
+    const button = page.frameLocator('#tour').locator('.psv-fullscreen-button');
+    await expect(button).toBeVisible({ timeout: 30_000 });
+    const viewport = page.viewportSize();
+    await button.tap();
+    await expect.poll(async () => frame.boundingBox()).toEqual({ x: 0, y: 0, width: viewport.width, height: viewport.height });
+    await button.tap();
+    await expect.poll(async () => (await frame.boundingBox()).width).toBe(300);
+  });
+
   test('minimap is small and a tap opens the full plan', async ({ page }) => {
     await page.goto('/?house=trojanovice&room=chodba');
     const map = page.locator('.psv-map');
@@ -128,6 +145,10 @@ test.describe('on a phone', () => {
     expect(box.width).toBeLessThanOrEqual(150);
     await page.touchscreen.tap(box.x + box.width / 2, box.y + box.height / 2);
     await expect(page.locator('.psv-map--maximized')).toHaveCount(1);
+    // A tap beside the plan closes it again.
+    await page.waitForTimeout(600);
+    await page.touchscreen.tap(30, 200);
+    await expect(page.locator('.psv-map--maximized')).toHaveCount(0);
     await expect(page).toHaveURL(/room=chodba/);
   });
 });

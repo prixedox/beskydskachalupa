@@ -134,6 +134,26 @@ export function createViewer({ container, tour, baseUrl, startRoom, onRoomChange
   // Phone rotated, or the window resized across the breakpoint.
   PHONE.addEventListener('change', () => viewer.setOption('moveSpeed', moveSpeed()));
 
+  // An iPhone has no real fullscreen: the viewer then only fills its own window, and for a
+  // tour embedded in a page that is the small frame. Stretch that frame over the whole page
+  // instead and give it back on exit. Works when the page is on the same site as the tour.
+  let frameBefore = null;
+  viewer.addEventListener('fullscreen', ({ fullscreenEnabled }) => {
+    const frame = window.frameElement;
+    if (!frame || document.fullscreenElement) return;
+    const page = frame.ownerDocument.documentElement;
+    if (fullscreenEnabled && !frameBefore) {
+      frameBefore = { frame: frame.style.cssText, scroll: page.style.overflow };
+      const fill = { position: 'fixed', inset: '0', width: '100%', height: '100%', margin: '0', 'max-width': 'none', 'max-height': 'none', 'border-radius': '0', 'z-index': '2147483647' };
+      for (const [name, value] of Object.entries(fill)) frame.style.setProperty(name, value, 'important');
+      page.style.overflow = 'hidden';
+    } else if (!fullscreenEnabled && frameBefore) {
+      frame.style.cssText = frameBefore.frame;
+      page.style.overflow = frameBefore.scroll;
+      frameBefore = null;
+    }
+  });
+
   const vt = viewer.getPlugin(VirtualTourPlugin);
   const map = hasPlan ? viewer.getPlugin(MapPlugin) : null;
 
