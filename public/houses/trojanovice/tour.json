@@ -1,0 +1,615 @@
+{
+  "title": "Beskydská chalupa Trojanovice",
+  "start": "venek",
+  "plan": {
+    "image": "plan.png",
+    "width": 8019,
+    "height": 2052,
+    "floors": [
+      {
+        "name": "Přízemí",
+        "x": 0,
+        "width": 2547
+      },
+      {
+        "name": "Podkroví",
+        "x": 2929,
+        "width": 2656
+      },
+      {
+        "name": "Zahrada",
+        "x": 5967,
+        "width": 2052
+      }
+    ]
+  },
+  "rooms": [
+    {
+      "id": "venek",
+      "name": "Před chalupou",
+      "pano": "pano/venek.jpg",
+      "preview": "pano/venek-preview.jpg",
+      "planPos": [
+        0.936,
+        0.6184
+      ],
+      "floor": "Zahrada",
+      "northOffset": -1.745,
+      "startYaw": 0.873,
+      "fixedView": true,
+      "links": [
+        {
+          "to": "krizovatka",
+          "yaw": 0.052,
+          "pitch": -0.14
+        },
+        {
+          "to": "jezirko",
+          "yaw": -1.012,
+          "pitch": -0.087
+        },
+        {
+          "to": "minigolf",
+          "yaw": 1.955,
+          "pitch": -0.105
+        },
+        {
+          "to": "dron",
+          "yaw": 1.745,
+          "pitch": 0.489
+        }
+      ]
+    },
+    {
+      "id": "krizovatka",
+      "name": "Vstup na terasu",
+      "pano": "pano/krizovatka.jpg",
+      "preview": "pano/krizovatka-preview.jpg",
+      "planPos": [
+        0.2254,
+        0.8536
+      ],
+      "floor": "Přízemí",
+      "northOffset": 1.222,
+      "startYaw": 0.349,
+      "links": [
+        {
+          "to": "terasa",
+          "yaw": 0.209,
+          "pitch": -0.314
+        },
+        {
+          "to": "venek",
+          "yaw": 2.443,
+          "pitch": -0.314
+        },
+        {
+          "to": "drevnik",
+          "yaw": -2.793,
+          "pitch": -0.175
+        },
+        {
+          "to": "jezirko",
+          "yaw": 1.815,
+          "pitch": -0.105
+        }
+      ]
+    },
+    {
+      "id": "terasa",
+      "name": "Krytá terasa",
+      "pano": "pano/terasa.jpg",
+      "preview": "pano/terasa-preview.jpg",
+      "planPos": [
+        0.2675,
+        0.827
+      ],
+      "floor": "Přízemí",
+      "northOffset": -0.873,
+      "startYaw": -2.094,
+      "links": [
+        {
+          "to": "vchod",
+          "yaw": -0.175,
+          "pitch": -0.175
+        },
+        {
+          "to": "krizovatka",
+          "yaw": -1.152,
+          "pitch": -0.209
+        }
+      ]
+    },
+    {
+      "id": "vchod",
+      "name": "Vstupní chodba",
+      "pano": "pano/vchod.jpg",
+      "preview": "pano/vchod-preview.jpg",
+      "planPos": [
+        0.1865,
+        0.7132
+      ],
+      "floor": "Přízemí",
+      "northOffset": -1.571,
+      "startYaw": 1.309,
+      "links": [
+        {
+          "to": "terasa",
+          "yaw": -2.985,
+          "pitch": -0.175
+        },
+        {
+          "to": "chodba",
+          "yaw": 2.164,
+          "pitch": -0.14
+        },
+        {
+          "to": "koupelna",
+          "yaw": 0.681,
+          "pitch": -0.14
+        },
+        {
+          "to": "sauna",
+          "yaw": 0.279,
+          "pitch": -0.14
+        }
+      ]
+    },
+    {
+      "id": "chodba",
+      "name": "Chodba",
+      "pano": "pano/chodba.jpg",
+      "preview": "pano/chodba-preview.jpg",
+      "planPos": [
+        0.2069,
+        0.5766
+      ],
+      "floor": "Přízemí",
+      "northOffset": -3.142,
+      "links": [
+        {
+          "to": "vchod",
+          "yaw": 0,
+          "pitch": -0.209
+        },
+        {
+          "to": "chodba2",
+          "yaw": 3.002,
+          "pitch": -0.14
+        },
+        {
+          "to": "podkrovi",
+          "yaw": 1.536,
+          "pitch": 0
+        },
+        {
+          "to": "jidelna",
+          "yaw": -2.409,
+          "pitch": -0.14
+        }
+      ]
+    },
+    {
+      "id": "chodba2",
+      "name": "Chodba u kuchyně",
+      "pano": "pano/chodba2.jpg",
+      "preview": "pano/chodba2-preview.jpg",
+      "planPos": [
+        0.1981,
+        0.1972
+      ],
+      "floor": "Přízemí",
+      "northOffset": 1.571,
+      "links": [
+        {
+          "to": "obyvak",
+          "yaw": 0.035,
+          "pitch": -0.209
+        },
+        {
+          "to": "kuchyn",
+          "yaw": -2.688,
+          "pitch": -0.175
+        },
+        {
+          "to": "chodba",
+          "yaw": 1.658,
+          "pitch": -0.14
+        }
+      ]
+    },
+    {
+      "id": "obyvak",
+      "name": "Obývací pokoj",
+      "pano": "pano/obyvak.jpg",
+      "preview": "pano/obyvak-preview.jpg",
+      "planPos": [
+        0.2798,
+        0.2162
+      ],
+      "floor": "Přízemí",
+      "northOffset": -0.646,
+      "startYaw": 0.785,
+      "links": [
+        {
+          "to": "chodba2",
+          "yaw": -0.855,
+          "pitch": -0.175
+        },
+        {
+          "to": "jidelna",
+          "yaw": -2.88,
+          "pitch": -0.175
+        }
+      ]
+    },
+    {
+      "id": "jidelna",
+      "name": "Jídelna",
+      "pano": "pano/jidelna.jpg",
+      "preview": "pano/jidelna-preview.jpg",
+      "planPos": [
+        0.2661,
+        0.4704
+      ],
+      "floor": "Přízemí",
+      "northOffset": -0.14,
+      "links": [
+        {
+          "to": "obyvak",
+          "yaw": 0.087,
+          "pitch": -0.175
+        },
+        {
+          "to": "chodba",
+          "yaw": -1.641,
+          "pitch": -0.14
+        }
+      ]
+    },
+    {
+      "id": "kuchyn",
+      "name": "Kuchyně",
+      "pano": "pano/kuchyn.jpg",
+      "preview": "pano/kuchyn-preview.jpg",
+      "planPos": [
+        0.1418,
+        0.2466
+      ],
+      "floor": "Přízemí",
+      "northOffset": 3.107,
+      "links": [
+        {
+          "to": "chodba2",
+          "yaw": -1.955,
+          "pitch": -0.175
+        }
+      ]
+    },
+    {
+      "id": "koupelna",
+      "name": "Koupelna",
+      "pano": "pano/koupelna.jpg",
+      "preview": "pano/koupelna-preview.jpg",
+      "planPos": [
+        0.1496,
+        0.5501
+      ],
+      "floor": "Přízemí",
+      "northOffset": -1.484,
+      "startYaw": -0.785,
+      "links": [
+        {
+          "to": "vchod",
+          "yaw": -2.234,
+          "pitch": -0.209
+        }
+      ]
+    },
+    {
+      "id": "sauna",
+      "name": "Sauna a sprcha",
+      "pano": "pano/sauna.jpg",
+      "preview": "pano/sauna-preview.jpg",
+      "planPos": [
+        0.1029,
+        0.6411
+      ],
+      "floor": "Přízemí",
+      "northOffset": -1.571,
+      "startYaw": 0.873,
+      "links": [
+        {
+          "to": "vchod",
+          "yaw": -3.019,
+          "pitch": -0.175
+        }
+      ]
+    },
+    {
+      "id": "podkrovi",
+      "name": "Podkroví – chodba",
+      "pano": "pano/podkrovi.jpg",
+      "preview": "pano/podkrovi-preview.jpg",
+      "planPos": [
+        0.5605,
+        0.2846
+      ],
+      "floor": "Podkroví",
+      "northOffset": 0,
+      "links": [
+        {
+          "to": "loznice1",
+          "yaw": -2.461,
+          "pitch": -0.14
+        },
+        {
+          "to": "loznice2",
+          "yaw": 1.641,
+          "pitch": -0.14
+        },
+        {
+          "to": "loznice3",
+          "yaw": 2.374,
+          "pitch": -0.14
+        },
+        {
+          "to": "chodba",
+          "yaw": 3.054,
+          "pitch": -0.349
+        }
+      ]
+    },
+    {
+      "id": "loznice1",
+      "name": "Ložnice 1",
+      "pano": "pano/loznice1.jpg",
+      "preview": "pano/loznice1-preview.jpg",
+      "planPos": [
+        0.4915,
+        0.4516
+      ],
+      "floor": "Podkroví",
+      "northOffset": -1.414,
+      "startYaw": -0.524,
+      "links": [
+        {
+          "to": "podkrovi",
+          "yaw": 2.391,
+          "pitch": -0.14
+        }
+      ]
+    },
+    {
+      "id": "loznice2",
+      "name": "Ložnice 2",
+      "pano": "pano/loznice2.jpg",
+      "preview": "pano/loznice2-preview.jpg",
+      "planPos": [
+        0.6431,
+        0.2694
+      ],
+      "floor": "Podkroví",
+      "northOffset": -1.518,
+      "startYaw": 1.745,
+      "links": [
+        {
+          "to": "podkrovi",
+          "yaw": -0.087,
+          "pitch": -0.14
+        }
+      ]
+    },
+    {
+      "id": "loznice3",
+      "name": "Ložnice 3",
+      "pano": "pano/loznice3.jpg",
+      "preview": "pano/loznice3-preview.jpg",
+      "planPos": [
+        0.6353,
+        0.4668
+      ],
+      "floor": "Podkroví",
+      "northOffset": -1.571,
+      "startYaw": 2.443,
+      "links": [
+        {
+          "to": "podkrovi",
+          "yaw": 0.227,
+          "pitch": -0.14
+        }
+      ]
+    },
+    {
+      "id": "herna",
+      "name": "Herna – stolní tenis",
+      "pano": "pano/herna.jpg",
+      "preview": "pano/herna-preview.jpg",
+      "planPos": [
+        0.0933,
+        0.368
+      ],
+      "floor": "Přízemí",
+      "northOffset": -2.915,
+      "startYaw": 2.793,
+      "links": [
+        {
+          "to": "garaz",
+          "yaw": 0.419,
+          "pitch": -0.14
+        }
+      ]
+    },
+    {
+      "id": "garaz",
+      "name": "Garáž a dílna",
+      "pano": "pano/garaz.jpg",
+      "preview": "pano/garaz-preview.jpg",
+      "planPos": [
+        0.0524,
+        0.44
+      ],
+      "floor": "Přízemí",
+      "northOffset": -3.142,
+      "links": [
+        {
+          "to": "herna",
+          "yaw": -1.361,
+          "pitch": -0.175
+        },
+        {
+          "to": "drevnik",
+          "yaw": 0.157,
+          "pitch": -0.105
+        }
+      ]
+    },
+    {
+      "id": "drevnik",
+      "name": "Zahrada u dřevníku",
+      "pano": "pano/drevnik.jpg",
+      "preview": "pano/drevnik-preview.jpg",
+      "planPos": [
+        0.0097,
+        0.8536
+      ],
+      "floor": "Přízemí",
+      "northOffset": -1.396,
+      "links": [
+        {
+          "to": "krizovatka",
+          "yaw": 2.985,
+          "pitch": -0.209
+        },
+        {
+          "to": "garaz",
+          "yaw": 2.653,
+          "pitch": -0.07
+        },
+        {
+          "to": "dron",
+          "yaw": 1.222,
+          "pitch": 0.524
+        }
+      ]
+    },
+    {
+      "id": "jezirko",
+      "name": "Jezírko",
+      "pano": "pano/jezirko.jpg",
+      "preview": "pano/jezirko-preview.jpg",
+      "planPos": [
+        0.9226,
+        0.8026
+      ],
+      "floor": "Zahrada",
+      "northOffset": -1.222,
+      "startYaw": -1.745,
+      "fixedView": true,
+      "links": [
+        {
+          "to": "wellness",
+          "yaw": 0.384,
+          "pitch": -0.035
+        },
+        {
+          "to": "venek",
+          "yaw": 2.618,
+          "pitch": -0.105
+        },
+        {
+          "to": "krizovatka",
+          "yaw": 0.838,
+          "pitch": -0.07
+        },
+        {
+          "to": "dron",
+          "yaw": 1.833,
+          "pitch": 0.785
+        }
+      ]
+    },
+    {
+      "id": "wellness",
+      "name": "Wellness domek",
+      "pano": "pano/wellness.jpg",
+      "preview": "pano/wellness-preview.jpg",
+      "planPos": [
+        0.9007,
+        0.7303
+      ],
+      "floor": "Zahrada",
+      "northOffset": 0.611,
+      "fixedView": true,
+      "links": [
+        {
+          "to": "jezirko",
+          "yaw": -0.925,
+          "pitch": -0.175
+        }
+      ]
+    },
+    {
+      "id": "minigolf",
+      "name": "Minigolf",
+      "pano": "pano/minigolf.jpg",
+      "preview": "pano/minigolf-preview.jpg",
+      "planPos": [
+        0.8788,
+        0.1711
+      ],
+      "floor": "Zahrada",
+      "northOffset": -1.745,
+      "startYaw": 0.262,
+      "fixedView": true,
+      "links": [
+        {
+          "to": "venek",
+          "yaw": -1.187,
+          "pitch": -0.052
+        },
+        {
+          "to": "dron",
+          "yaw": 0.052,
+          "pitch": 0.611
+        }
+      ]
+    },
+    {
+      "id": "dron",
+      "name": "Pohled z dronu",
+      "pano": "pano/dron.jpg",
+      "preview": "pano/dron-preview.jpg",
+      "planPos": [
+        0.8956,
+        0.25
+      ],
+      "floor": "Zahrada",
+      "northOffset": -3.142,
+      "fixedView": true,
+      "links": [
+        {
+          "to": "venek",
+          "yaw": -0.663,
+          "pitch": -0.82
+        },
+        {
+          "to": "jezirko",
+          "yaw": -0.227,
+          "pitch": -0.506
+        },
+        {
+          "to": "minigolf",
+          "yaw": 1.955,
+          "pitch": -0.908
+        },
+        {
+          "to": "drevnik",
+          "yaw": 0.768,
+          "pitch": -0.628
+        }
+      ]
+    }
+  ],
+  "exterior": []
+}

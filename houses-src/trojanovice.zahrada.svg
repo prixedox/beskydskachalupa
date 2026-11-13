@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Garden map of Beskydská chalupa for the tour plan ("Zahrada" tab).
+     Units are metres: origin at the house corner by the garage on the road side, x along
+     the house, y away from the road. Positions were read off the drone panorama, so the map
+     is a sketch, not a survey. render-plan.mjs draws it next to the floor plans. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="2052" height="2052" viewBox="-31 -30 76 76" font-family="Arial, Helvetica, sans-serif" fill="#3a3530">
+  <rect x="-31" y="-30" width="76" height="76" fill="#f1f4e8"/>
+
+  <!-- trees and shrubs -->
+  <g fill="#dbe6cb">
+    <circle cx="22" cy="20" r="2.4"/><circle cx="25" cy="22.5" r="2.6"/><circle cx="27.5" cy="26" r="2.3"/>
+    <circle cx="28.5" cy="13" r="3.2"/><circle cx="-4" cy="20" r="3"/><circle cx="3" cy="26" r="2.6"/>
+    <circle cx="-20" cy="22" r="3.4"/><circle cx="-24" cy="5" r="3"/><circle cx="36" cy="30" r="3.4"/>
+    <circle cx="38" cy="14" r="3"/><circle cx="8" cy="38" r="3"/><circle cx="-12" cy="34" r="3.2"/>
+    <circle cx="33" cy="40" r="2.8"/><circle cx="-22" cy="-16" r="3"/><circle cx="38" cy="-20" r="3.2"/>
+  </g>
+
+  <!-- road and hedge -->
+  <rect x="-31" y="-8.5" width="76" height="5" fill="#d9d6ce"/>
+  <text x="-29" y="-5.4" font-size="1.3" fill="#8a857a">silnice</text>
+  <rect x="1" y="-2.6" width="18" height="0.8" rx="0.4" fill="#c5d6ae"/>
+
+  <!-- parking and paths -->
+  <rect x="20.5" y="-2.6" width="11.5" height="9.6" rx="1.5" fill="#e5e1d7" stroke="#bcb6a8" stroke-width="0.12"/>
+  <text x="26.25" y="2.7" font-size="1.4" text-anchor="middle">Parkování</text>
+  <g fill="none" stroke="#e5e1d7" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M25 7 C25.5 11, 25 15, 21 15.5 L19.6 14.4"/>
+    <path d="M13.6 13.6 C13.8 18, 14.4 20.5, 15.4 22.8"/>
+    <path d="M18.6 28.2 C19.8 30.5, 20.5 32, 21 33.6"/>
+    <path d="M-0.6 12.6 L-9.4 11.6"/>
+  </g>
+
+  <!-- house: body, covered walkway and terrace -->
+  <rect x="0" y="11.86" width="13.3" height="1.55" fill="#eadfcd" stroke="#3a3530" stroke-width="0.12" stroke-dasharray="0.5 0.35"/>
+  <rect x="13.3" y="9.1" width="5.8" height="4.3" fill="#eadfcd" stroke="#3a3530" stroke-width="0.12" stroke-dasharray="0.5 0.35"/>
+  <path d="M0 0 H19.1 V9.1 H13.3 V11.86 H0 Z" fill="#cdb79b" stroke="#3a3530" stroke-width="0.32" stroke-linejoin="round"/>
+  <text x="9.2" y="5.6" font-size="2" font-weight="bold" text-anchor="middle">Chalupa</text>
+  <text x="16.2" y="11.7" font-size="1.05" text-anchor="middle">terasa</text>
+
+  <!-- woodshed -->
+  <rect x="-15" y="10" width="5.5" height="3" fill="#c0a27c" stroke="#3a3530" stroke-width="0.2"/>
+  <text x="-12.25" y="15" font-size="1.4" text-anchor="middle">Dřevník</text>
+
+  <!-- wellness cabin with deck -->
+  <rect x="18.5" y="23.4" width="2" height="4.2" fill="#eadfcd" stroke="#3a3530" stroke-width="0.12"/>
+  <rect x="12.5" y="23" width="6" height="5" fill="#d8ba8a" stroke="#3a3530" stroke-width="0.24"/>
+  <text x="15.5" y="29.8" font-size="1.3" text-anchor="middle">Wellness</text>
+
+  <!-- pond -->
+  <ellipse cx="21.5" cy="37" rx="4.6" ry="3.3" fill="#bfdcec" stroke="#7fa9c4" stroke-width="0.18"/>
+  <text x="21.5" y="37.5" font-size="1.4" text-anchor="middle" fill="#2f5d79">Jezírko</text>
+
+  <!-- minigolf lanes -->
+  <g fill="#ffffff" stroke="#98a195" stroke-width="0.1">
+    <rect x="-8.6" y="-24" width="6.7" height="0.9" rx="0.45"/>
+    <rect x="-8.6" y="-21.8" width="6.7" height="0.9" rx="0.45"/>
+    <rect x="-8.6" y="-19.6" width="6.7" height="0.9" rx="0.45"/>
+    <rect x="-8.6" y="-17.4" width="6.7" height="0.9" rx="0.45"/>
+    <rect x="-8.6" y="-15.2" width="6.7" height="0.9" rx="0.45"/>
+    <rect x="-8.6" y="-13" width="6.7" height="0.9" rx="0.45"/>
+    <rect x="22" y="-20.5" width="6" height="0.9" rx="0.45" transform="rotate(-25 25 -20)"/>
+    <rect x="24" y="-16.5" width="6" height="0.9" rx="0.45" transform="rotate(20 27 -16)"/>
+  </g>
+  <text x="-5.25" y="-9.9" font-size="1.5" text-anchor="middle">Minigolf</text>
+
+  <text x="-29" y="43.6" font-size="2.8">ZAHRADA</text>
+  <text x="43.5" y="44.8" font-size="1.05" text-anchor="end" fill="#8a857a">orientační plánek, není v měřítku</text>
+</svg>

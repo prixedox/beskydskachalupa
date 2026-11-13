@@ -1,0 +1,31 @@
+{
+  "name": "beskydskachalupa",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "prepare-house": "node scripts/prepare-house.mjs",
+    "render-plan": "node scripts/render-plan.mjs"
+  },
+  "dependencies": {
+    "@photo-sphere-viewer/core": "5.15.1",
+    "@photo-sphere-viewer/gallery-plugin": "5.15.1",
+    "@photo-sphere-viewer/gyroscope-plugin": "5.15.1",
+    "@photo-sphere-viewer/map-plugin": "5.15.1",
+    "@photo-sphere-viewer/markers-plugin": "5.15.1",
+    "@photo-sphere-viewer/virtual-tour-plugin": "5.15.1",
+    "three": "0.185.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "pdf-to-img": "^7.0.0",
+    "sharp": "^0.35.5",
+    "vite": "^8.3.1",
+    "vitest": "^5.0.2"
+  }
+}
