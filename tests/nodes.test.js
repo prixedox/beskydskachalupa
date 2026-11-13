@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { normalizeYaw, entryYaw, arrivalYaw, tourToNodes, planAnchor } from '../src/viewer/nodes.js';
+import { normalizeYaw, entryYaw, arrivalYaw, tourToNodes, planAnchor, floorRoom } from '../src/viewer/nodes.js';
 import { validateTour } from '../src/tour-loader.js';
 
 const TAU = 2 * Math.PI;
@@ -107,6 +107,33 @@ describe('planAnchor', () => {
 
   it('is null for a floor without photo spots', () => {
     expect(planAnchor(tour, null)).toBeNull();
+  });
+});
+
+describe('floorRoom', () => {
+  const make = (floors) => validateTour({
+    plan: { image: 'plan.png', width: 1000, height: 500, floors },
+    rooms: [
+      { id: 'garden', pano: 'g.jpg' },
+      { id: 'hall', pano: 'h.jpg', planPos: [0.1, 0.5], floor: 'Přízemí' },
+      { id: 'living', pano: 'l.jpg', planPos: [0.2, 0.5], floor: 'Přízemí' },
+      { id: 'attic', pano: 'a.jpg', planPos: [0.8, 0.5], floor: 'Podkroví' },
+    ],
+  }).tour;
+  const floors = [{ name: 'Přízemí', x: 0, width: 400, room: 'living' }, { name: 'Podkroví', x: 600, width: 400, room: 'hall' }];
+
+  it('is the room the plan names for the floor', () => {
+    expect(floorRoom(make(floors), 'Přízemí').id).toBe('living');
+  });
+
+  it('falls back to the first room placed on the floor', () => {
+    // Podkroví names a room of another floor.
+    expect(floorRoom(make(floors), 'Podkroví').id).toBe('attic');
+    expect(floorRoom(make([{ name: 'Přízemí', x: 0, width: 400 }]), 'Přízemí').id).toBe('hall');
+  });
+
+  it('is null for a floor without rooms', () => {
+    expect(floorRoom(make(floors), 'Zahrada')).toBeNull();
   });
 });
 

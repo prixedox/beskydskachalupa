@@ -39,10 +39,14 @@ test('plan has a tab for each floor', async ({ page }) => {
   await expect(page.locator('.psv-caption-content')).toHaveText('Ložnice 2', { timeout: 30_000 });
   const active = page.locator('.floor-tabs button.is-active');
   await expect(active).toHaveText('Podkroví');
+  // A tab walks to the default room of its floor.
   await page.locator('.floor-tabs button', { hasText: 'Přízemí' }).click();
   await expect(active).toHaveText('Přízemí');
-  // Looking at another floor does not leave the room.
-  await expect(page.locator('.psv-caption-content')).toHaveText('Ložnice 2');
+  await expect(page.locator('.psv-caption-content')).toHaveText('Obývací pokoj', { timeout: 30_000 });
+  await expect(page).toHaveURL(/room=obyvak/);
+  await page.locator('.floor-tabs button', { hasText: 'Zahrada' }).click();
+  await expect(page.locator('.psv-caption-content')).toHaveText('Před chalupou', { timeout: 30_000 });
+  await expect(active).toHaveText('Zahrada');
 });
 
 test('unknown house shows czech error', async ({ page }) => {

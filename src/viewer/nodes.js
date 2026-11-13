@@ -28,6 +28,13 @@ export function planAnchor(tour, floor) {
   return { x: (Math.min(...xs) + Math.max(...xs)) / 2, y: (Math.min(...ys) + Math.max(...ys)) / 2 };
 }
 
+// Room a floor tab leads to: the one the plan names for that floor, else the first room on it.
+export function floorRoom(tour, name) {
+  const placed = tour.rooms.filter((r) => r.planPos && r.floor === name);
+  const wanted = tour.plan.floors?.find((f) => f.name === name)?.room;
+  return placed.find((r) => r.id === wanted) ?? placed[0] ?? null;
+}
+
 export function tourToNodes(tour, baseUrl) {
   const plan = tour.plan;
   return tour.rooms.map((room) => ({

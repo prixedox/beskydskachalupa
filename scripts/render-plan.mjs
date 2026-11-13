@@ -70,7 +70,10 @@ console.log(`wrote plan.png ${width}x${height}`);
 const tourPath = path.join(outDir, 'tour.json');
 if (await access(tourPath).then(() => true, () => false)) {
   const tour = JSON.parse(await readFile(tourPath, 'utf8'));
-  tour.plan = { image: 'plan.png', width, height, ...(parts.length > 1 ? { floors: parts } : {}) };
+  // Keep the default room of each floor (set by hand in tour.json) when the plan is drawn again.
+  const rooms = Object.fromEntries((tour.plan?.floors ?? []).map((f) => [f.name, f.room]));
+  const floorsOut = parts.map((f) => (rooms[f.name] ? { ...f, room: rooms[f.name] } : f));
+  tour.plan = { image: 'plan.png', width, height, ...(parts.length > 1 ? { floors: floorsOut } : {}) };
   await writeFile(tourPath, JSON.stringify(tour, null, 2) + '\n');
   console.log('updated tour.json plan');
 }

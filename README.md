@@ -36,7 +36,8 @@ URL parameters: `house=<id>` (house folder), `room=<id>` (start room), `edit` (e
 Optional fields of a room in `tour.json`, written by hand:
 
 - `floor`: name of the floor, one of the names in `plan.floors` (for example `"Přízemí"`). The plan
-  then shows the floor of the current room, with tabs to look at the others.
+  then shows the floor of the current room, with a tab for each floor. A tab leads to the room named
+  in that floor's `room` in `plan.floors`, or to the first room on the floor.
 - `startYaw`: where the view points (radians) when the tour opens in that room.
 - `fixedView: true`: walking in also turns to `startYaw` instead of keeping the walking direction
   (garden spots are far apart, so the direction means little there).

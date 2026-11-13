@@ -9,17 +9,20 @@
       {
         "name": "Přízemí",
         "x": 0,
-        "width": 2547
+        "width": 2547,
+        "room": "obyvak"
       },
       {
         "name": "Podkroví",
         "x": 2929,
-        "width": 2656
+        "width": 2656,
+        "room": "podkrovi"
       },
       {
         "name": "Zahrada",
         "x": 5967,
-        "width": 2052
+        "width": 2052,
+        "room": "venek"
       }
     ]
   },

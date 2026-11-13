@@ -33,9 +33,9 @@ describe('validateTour', () => {
   });
 
   it('keeps where each floor sits in the plan image', () => {
-    const plan = { image: 'plan.png', width: 3000, height: 1000, floors: [{ name: 'Přízemí', x: 0, width: 1400 }, { name: 'Podkroví', x: 1600, width: 1400 }, { name: 'bez šířky', x: 5 }] };
+    const plan = { image: 'plan.png', width: 3000, height: 1000, floors: [{ name: 'Přízemí', x: 0, width: 1400, room: 'a' }, { name: 'Podkroví', x: 1600, width: 1400, room: 7 }, { name: 'bez šířky', x: 5 }] };
     const { tour } = validateTour({ plan, rooms: [room('a')] });
-    expect(tour.plan.floors).toEqual([{ name: 'Přízemí', x: 0, width: 1400 }, { name: 'Podkroví', x: 1600, width: 1400 }]);
+    expect(tour.plan.floors).toEqual([{ name: 'Přízemí', x: 0, width: 1400, room: 'a' }, { name: 'Podkroví', x: 1600, width: 1400 }]);
   });
 
   it('keeps the floor of a room when it is a name', () => {

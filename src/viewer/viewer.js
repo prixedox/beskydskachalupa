@@ -9,7 +9,7 @@ import '@photo-sphere-viewer/markers-plugin/index.css';
 import '@photo-sphere-viewer/map-plugin/index.css';
 import '@photo-sphere-viewer/gallery-plugin/index.css';
 import '@photo-sphere-viewer/virtual-tour-plugin/index.css';
-import { tourToNodes, arrivalYaw, planAnchor } from './nodes.js';
+import { tourToNodes, arrivalYaw, planAnchor, floorRoom } from './nodes.js';
 
 const LANG = {
   zoom: 'Přiblížení',
@@ -149,7 +149,7 @@ export function createViewer({ container, tour, baseUrl, startRoom, onRoomChange
     showFloor();
   });
 
-  // Tabs to look at another floor than the one you stand on.
+  // Tabs to go to another floor: each leads to that floor's default room.
   const tabs = multi && mapEl ? document.createElement('div') : null;
   const lookAtFloor = (name) => {
     viewFloor = name;
@@ -169,7 +169,12 @@ export function createViewer({ container, tour, baseUrl, startRoom, onRoomChange
       tabs.append(button);
     }
     tabs.addEventListener('click', (e) => {
-      if (e.target.dataset.floor) lookAtFloor(e.target.dataset.floor);
+      const name = e.target.dataset.floor;
+      if (!name) return;
+      // Show the floor at once, then walk to its room, facing that room's own view.
+      lookAtFloor(name);
+      const room = floorRoom(tour, name);
+      if (room && room.id !== vt.getCurrentNode()?.id) vt.setCurrentNode(room.id, { rotateTo: { yaw: room.startYaw, pitch: 0 } });
     });
     // The map must not take a press on a tab for a drag or a click on the plan.
     for (const type of ['mousedown', 'touchstart', 'click']) tabs.addEventListener(type, (e) => e.stopPropagation());
