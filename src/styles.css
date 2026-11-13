@@ -300,3 +300,48 @@ button.model3d-label:hover { background: rgba(17, 17, 17, 0.95); }
     display: none;
   }
 }
+
+/* Edges of the minimap that are dragged to resize it */
+.map-resize {
+  position: absolute;
+  z-index: 3;
+  touch-action: none;
+}
+
+.map-resize--top {
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 7px;
+  cursor: ns-resize;
+}
+
+.map-resize--right {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 7px;
+  cursor: ew-resize;
+}
+
+.map-resize:hover,
+.is-resizing .map-resize {
+  background: var(--accent);
+  opacity: 0.85;
+}
+
+/* Follow the pointer at once instead of easing to each new size. */
+.psv-map.is-resizing {
+  transition: none !important;
+}
+
+.psv-map--maximized .map-resize,
+.psv-map--collapsed .map-resize {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .map-resize {
+    display: none;
+  }
+}

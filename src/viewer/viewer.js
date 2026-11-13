@@ -36,7 +36,19 @@ const LANG = {
 const PHONE = window.matchMedia('(max-width: 600px)');
 // Minimap box in px; zoom (percent of the plan image's own size) scales with it so the
 // whole house fits either way.
-const minimapSize = () => (PHONE.matches ? 140 : 260);
+// On a big screen the user can drag the minimap's edge; that size is kept for next time.
+const MIN_MINIMAP = 160;
+const SIZE_KEY = 'tour-minimap-size';
+function storedSize() {
+  try {
+    const size = Number(localStorage.getItem(SIZE_KEY));
+    return size >= MIN_MINIMAP ? size : null;
+  } catch {
+    return null; // storage blocked (private mode)
+  }
+}
+let chosenSize = storedSize();
+const minimapSize = () => (PHONE.matches ? 140 : chosenSize ?? 260);
 const minimapZoom = () => (10 * minimapSize()) / 260;
 // A swipe across the screen turns the view by what the screen shows, and a phone held
 // upright shows a narrow slice, so looking around took a dozen swipes. Turn faster there.
@@ -189,10 +201,62 @@ export function createViewer({ container, tour, baseUrl, startRoom, onRoomChange
   }
 
   if (map && mapEl) {
-    // Phone rotated or window resized across the breakpoint.
-    PHONE.addEventListener('change', () => {
+    const applySize = () => {
       map.setOptions({ size: `${minimapSize()}px`, defaultZoom: minimapZoom() });
-      if (!mapEl.classList.contains('psv-map--maximized')) map.setZoom(minimapZoom());
+      if (!isOpen()) map.setZoom(minimapZoom());
+    };
+    // Phone rotated or window resized across the breakpoint.
+    PHONE.addEventListener('change', applySize);
+
+    // The minimap sits in the bottom left corner, so its top and right edges are free:
+    // drag either to resize it.
+    const maxSize = () => Math.max(MIN_MINIMAP, Math.min(viewer.container.clientWidth, viewer.container.clientHeight) - 80);
+    for (const edge of ['top', 'right']) {
+      const grip = document.createElement('div');
+      grip.className = `map-resize map-resize--${edge}`;
+      grip.addEventListener('pointerdown', (down) => {
+        down.preventDefault();
+        grip.setPointerCapture(down.pointerId);
+        mapEl.classList.add('is-resizing');
+        const start = minimapSize();
+        const move = (e) => {
+          const grown = edge === 'top' ? down.clientY - e.clientY : e.clientX - down.clientX;
+          chosenSize = Math.round(Math.min(maxSize(), Math.max(MIN_MINIMAP, start + grown)));
+          applySize();
+        };
+        const stop = () => {
+          grip.removeEventListener('pointermove', move);
+          grip.removeEventListener('pointerup', stop);
+          grip.removeEventListener('pointercancel', stop);
+          mapEl.classList.remove('is-resizing');
+          try {
+            localStorage.setItem(SIZE_KEY, String(minimapSize()));
+          } catch {
+            // storage blocked (private mode): the size lasts until the page is closed
+          }
+          showFloor();
+        };
+        grip.addEventListener('pointermove', move);
+        grip.addEventListener('pointerup', stop);
+        grip.addEventListener('pointercancel', stop);
+      });
+      // The map must not take the drag for panning the plan.
+      for (const type of ['pointerdown', 'mousedown', 'touchstart']) grip.addEventListener(type, (e) => e.stopPropagation());
+      mapEl.append(grip);
+    }
+
+    // A click or tap on the opened plan closes it. Picking a room closes it too (the map
+    // does that itself); dragging the plan or pinching it does not.
+    let press = null;
+    mapEl.addEventListener('pointerdown', (e) => {
+      press = isOpen() && e.isPrimary && e.target.tagName === 'CANVAS' ? { x: e.clientX, y: e.clientY } : null;
+    });
+    mapEl.addEventListener('pointerup', (e) => {
+      if (!press) return;
+      const moved = Math.hypot(e.clientX - press.x, e.clientY - press.y);
+      press = null;
+      // After the map has handled the same click, which may be on a room.
+      if (moved < 6) setTimeout(() => map.minimize());
     });
 
     // On a phone the minimap is too small to aim at a room dot or the corner button, so a

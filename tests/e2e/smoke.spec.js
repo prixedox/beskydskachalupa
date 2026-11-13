@@ -49,6 +49,40 @@ test('plan has a tab for each floor', async ({ page }) => {
   await expect(active).toHaveText('Zahrada');
 });
 
+test('minimap is resized by dragging its edge and keeps the size', async ({ page }) => {
+  await page.goto('/?house=trojanovice&room=obyvak');
+  const map = page.locator('.psv-map');
+  await expect(map).toBeVisible({ timeout: 30_000 });
+  const before = await map.boundingBox();
+  // Pull the top edge 100 px up.
+  await page.mouse.move(before.x + before.width / 2, before.y + 3);
+  await page.mouse.down();
+  await page.mouse.move(before.x + before.width / 2, before.y - 97, { steps: 5 });
+  await page.mouse.up();
+  const width = async () => (await map.boundingBox()).width;
+  await expect.poll(width).toBeGreaterThan(before.width + 80);
+  await page.reload();
+  await expect(map).toBeVisible({ timeout: 30_000 });
+  await expect.poll(width).toBeGreaterThan(before.width + 80);
+});
+
+test('a click on the opened plan closes it', async ({ page }) => {
+  await page.goto('/?house=trojanovice&room=obyvak');
+  await expect(page.locator('.psv-map')).toBeVisible({ timeout: 30_000 });
+  await page.locator('.psv-map__button--top-right').click();
+  const opened = page.locator('.psv-map--maximized');
+  await expect(opened).toHaveCount(1);
+  // Dragging the plan keeps it open.
+  await page.mouse.move(60, 400);
+  await page.mouse.down();
+  await page.mouse.move(120, 430, { steps: 4 });
+  await page.mouse.up();
+  await page.waitForTimeout(300);
+  await expect(opened).toHaveCount(1);
+  await page.mouse.click(40, 400);
+  await expect(opened).toHaveCount(0);
+});
+
 test('unknown house shows czech error', async ({ page }) => {
   await page.goto('/?house=neexistuje');
   await expect(page.locator('.error-screen')).toHaveText('Prohlídka „neexistuje“ neexistuje.');
